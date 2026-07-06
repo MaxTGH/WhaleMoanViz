@@ -14,9 +14,8 @@ function saveEditedDetections(fileFullPath)
 
     global REMORA
 
-    % access the main data table, update the 'saved' data table
+    % access the main data table
     data = REMORA.lt.lVis_det.dataTable;
-    REMORA.lt.lVis_det.dataTableSaved = REMORA.lt.lVis_det.dataTable;
 
     % naming the new label file
     [folder, name, ext] = fileparts(fileFullPath);
@@ -51,6 +50,9 @@ function saveEditedDetections(fileFullPath)
     % write the updated data table to the new file
     try
         writetable(data, saveFilePath, 'Delimiter', '\t');  % save as tab-delimited file
+        % recording saved table only when writing file is successful
+        % saved table in memory matches table in files
+        REMORA.lt.lVis_det.dataTableSaved = REMORA.lt.lVis_det.dataTable; 
         disp(['Edits successfully saved to ', saveFilePath]);
         REMORA.lt.lVis_det.saveFilePath = saveFilePath;
     catch ME

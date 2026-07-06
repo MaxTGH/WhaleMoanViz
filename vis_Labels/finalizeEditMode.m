@@ -75,6 +75,7 @@ function finalizeEditMode(event)
             
             % update detection fields
             initializeDetectionFields(REMORA.lt.lVis_det.dataTable);
+            % initializeDetectionFields(REMORA.lt.lVis_det.dataTable, "time");
     
             % redraw spectrogram
             wmvControl('Overlay');
@@ -94,7 +95,7 @@ function finalizeEditMode(event)
                 REMORA.lt.lVis_det.dataTable.pr(detectionIdx) = 2;    
                 % populates data structure containing each bounding box
                 % (this data structure is used for plotting)
-                initializeDetectionFields(REMORA.lt.lVis_det.dataTable);
+                initializeDetectionFields(REMORA.lt.lVis_det.dataTable, "pr");
         
                 % remove original rectangle from the display
                 delete(REMORA.lt.lVis_det.currentEdit.originalRect);
@@ -109,7 +110,7 @@ function finalizeEditMode(event)
                 % delete data from dataTable
                 REMORA.lt.lVis_det.dataTable(detectionIdx, :) = [];
                 % update detection fields
-                initializeDetectionFields(REMORA.lt.lVis_det.dataTable);
+                initializeDetectionFields(REMORA.lt.lVis_det.dataTable, "delete");
 
             end
 

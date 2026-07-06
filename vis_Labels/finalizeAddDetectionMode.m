@@ -15,9 +15,12 @@ function finalizeAddDetectionMode(~,~)
 
      % Prompt for label selection
     labelOptions =REMORA.lt.lVis_det.labels;
+
+    %runtime long because it's waiting for user input
     [labelIdx, ok] = listdlg('PromptString', 'Select Label:', ...
                              'SelectionMode', 'single', ...
                              'ListString', labelOptions);
+    
     if ok
         label = labelOptions{labelIdx};
         disp(['Label selected: ', label]);
