@@ -37,11 +37,12 @@ function [prevDet,nextDet] = lt_lVis_envDet_rf()
     
     % check if previous / next detection exists, and exclude detections 
     % outside of current LTSA file  
-    if ~isempty(next) && next<=PARAMS.raw.dnumEnd(end)
+
+    if ~isempty(next) && next <= PARAMS.ltsa.end.dnum
         nextDet = next;
     end
     
-    if ~isempty(prev) && prev>=PARAMS.raw.dnumStart(1)
+    if ~isempty(prev) && prev >= PARAMS.ltsa.start.dnum
         prevDet = prev;
     end
 
