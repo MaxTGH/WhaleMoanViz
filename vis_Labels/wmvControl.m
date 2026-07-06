@@ -332,22 +332,67 @@ function wmvControl(action)
         wmvControl('Overlay');
         
     
-    elseif strcmp(action, 'PrevDetection')
-    % callback function to move plots to previous detection
-        motion('prevDet');
-        wmvControl('Overlay');
-        
+
    
     elseif strcmp(action, 'SmallStepForward')
     % callback function to move plots forwards
         motion('forward');
         wmvControl('Overlay');
         
+    % elseif strcmp(action, 'PrevDetection')
+    %     motion('prevDet');
+    %     wmvControl('Overlay');
+    elseif strcmp(action, 'PrevDetection')
+
+        [prevDet, ~] = lt_lVis_envDet_rf;
+
+        if isempty(prevDet)
+            disp('First detection! No detections found before current window.')
+            return
+        end
+
+        % Previous detection is still inside the current x.wav
+        if prevDet >= PARAMS.raw.dnumStart(1)
+            disp(prevDet)
+            disp(PARAMS.raw.dnumStart(1))
+            motion('prevDet');
+            wmvControl('Overlay');
+            return
+        else
+            wmvControl('LoadPrev')
+        end
+
+        % ---------- Cross-x.wav case only --------- 
+
+        winLength = PARAMS.tseg.sec;
+        stepFW = winLength * 0.5;
+        PARAMS.plot.dnum = prevDet - datenum([0 0 0 0 0 stepFW]);
+        PARAMS.plot.dvec = datevec(PARAMS.plot.dnum);
+
+        readseg
+        plot_triton
+        wmvControl('Overlay'); 
+                
     
     elseif strcmp(action, 'NextDetection')
-    % callback function to move plots to next detection
+        [~, nextDet] = lt_lVis_envDet_rf;
+    
+        if isempty(nextDet)
+            disp('Last detection! No detections found after current window.')
+            return
+        end
+    
+        REMORA.lt.lVis_det.suppressOverlay = true;
+    
+        while nextDet > PARAMS.raw.dnumEnd(end)
+            wmvControl('LoadNext');
+        end
+    
+        REMORA.lt.lVis_det.suppressOverlay = false;
+    
         motion('nextDet');
         wmvControl('Overlay');
+
         
     
     elseif strcmp(action, 'AddDetection')
