@@ -144,7 +144,11 @@ function row = blankRowLike(T)
 
     % Build table
     row = cell2table(data, 'VariableNames', varNames);
+    REMORA.lt.lVis_det.dataTable.start_time.Format = 'yyyy-MM-dd HH:mm:ss.SSS';
+    REMORA.lt.lVis_det.dataTable.end_time.Format = 'yyyy-MM-dd HH:mm:ss.SSS';
 end
+
+
 
 % 
 
