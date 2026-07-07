@@ -48,6 +48,9 @@ function finalizeAddDetectionMode(~,~)
         start_time_sec = seconds(startTime - wav_start_datetime);  % Time difference in seconds
         end_time_sec = seconds(endTime - wav_start_datetime);  % Time difference in seconds
 
+        startTime.Format = 'yyyy-MM-dd HH:mm:ss.SSS'; % Display with fractions of a second
+        endTime.Format = 'yyyy-MM-dd HH:mm:ss.SSS'; % Display with fractions of a second
+
         % Retrieve necessary fields for new detection row
         wav_file_path = fullfile(PARAMS.inpath, PARAMS.infile);
         score = 1;  % Default score, adjust if needed
