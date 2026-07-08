@@ -50,7 +50,6 @@ function finalizeAddDetectionMode(~,~)
 
         startTime.Format = 'yyyy-MM-dd HH:mm:ss.SSS'; % Display with fractions of a second
         endTime.Format = 'yyyy-MM-dd HH:mm:ss.SSS'; % Display with fractions of a second
-
         % Retrieve necessary fields for new detection row
         wav_file_path = fullfile(PARAMS.inpath, PARAMS.infile);
         score = 1;  % Default score, adjust if needed

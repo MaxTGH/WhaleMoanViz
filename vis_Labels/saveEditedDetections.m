@@ -14,6 +14,10 @@ function saveEditedDetections(fileFullPath)
 
     global REMORA
 
+    % Format here just in case
+    REMORA.lt.lVis_det.dataTable.start_time.Format = 'yyyy-MM-dd HH:mm:ss.SSS';
+    REMORA.lt.lVis_det.dataTable.end_time.Format = 'yyyy-MM-dd HH:mm:ss.SSS';
+    
     % access the main data table
     data = REMORA.lt.lVis_det.dataTable;
 
