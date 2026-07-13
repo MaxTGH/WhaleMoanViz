@@ -420,9 +420,31 @@ function wmvControl(action)
         if isfield(REMORA.lt.lVis_det, 'verifiedFilePath')
             makeNewExamples;
         end
+%%
+    elseif strcmp(action, 'FilterDetections')
+        % callback function for filtering detections
+        disp('Filter detections button clicked.');
     
-    end
-     
+        labelOptions = REMORA.lt.lVis_det.labels;
+
+        [selectedIdx, ok] = listdlg( ...
+            'PromptString', 'Select labels to display:', ...
+            'SelectionMode', 'multiple', ...
+            'ListString', labelOptions);
+    
+        if ~ok
+            return;
+        end
+    
+        selectedLabels = labelOptions(selectedIdx);
+    
+        % Store the selected labels
+        REMORA.lt.lVis_det.selectedLabels = selectedLabels;
+    
+        % Refresh the display
+        wmvControl('Overlay');
+   end   
+%%     
 
    % graying out forwards / backwards buttons if at end / beginning of file
    % (this is achieved by copying the current state of the previous / next

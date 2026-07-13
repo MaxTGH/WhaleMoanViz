@@ -40,7 +40,18 @@ function plotSpec
         % filter to only plot detections with pr = 1, 2, or 3
         validIdx = find(REMORA.lt.lVis_det.detection.pr(Lo:Hi) == 1 | REMORA.lt.lVis_det.detection.pr(Lo:Hi) == 2 | REMORA.lt.lVis_det.detection.pr(Lo:Hi) == 3);
         plotIdx = Lo - 1 + validIdx;  % Adjust indices to match original array indexing
-    
+%%
+        % Filter by selected labels, if the filter is active
+        if isfield(REMORA.lt.lVis_det, 'selectedLabels') && ...
+                ~isempty(REMORA.lt.lVis_det.selectedLabels)
+        
+            keep = ismember( ...
+                REMORA.lt.lVis_det.detection.labels(plotIdx), ...
+                REMORA.lt.lVis_det.selectedLabels);
+        
+            plotIdx = plotIdx(keep);
+        end
+ %%
         % get the final detection end time for dotted line plotting
         finalDet = REMORA.lt.lVis_det.detection.stops(end);
     
