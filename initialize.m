@@ -3,6 +3,8 @@ global REMORA HANDLES PARAMS
 % initialization script for label tracking remora
 % Created by Michaela Alksne and Shane Andres
 
+config
+
 REMORA.lt.menu = uimenu(HANDLES.remmenu,'Label','&WhaleMoanVizGit',...
     'Enable','on','Visible','on');
 
