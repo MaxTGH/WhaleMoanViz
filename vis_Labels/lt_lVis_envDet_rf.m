@@ -31,8 +31,18 @@ function [prevDet,nextDet] = lt_lVis_envDet_rf()
     % finds the nearest detections
     if isfield(REMORA.lt.lVis_det.detection,'starts')
         labs = REMORA.lt.lVis_det.detection.starts;
-        next = labs(find(labs>endWV,1));
-        prev = labs(find(labs<startWV,1,'last'));
+        labels = REMORA.lt.lVis_det.detection.labels;
+    
+        % Apply label filter if active
+        if isfield(REMORA.lt.lVis_det, 'selectedLabels') && ...
+                ~isempty(REMORA.lt.lVis_det.selectedLabels)
+    
+            keep = ismember(labels, REMORA.lt.lVis_det.selectedLabels);
+            labs = labs(keep);
+        end
+    
+        next = labs(find(labs > endWV, 1));
+        prev = labs(find(labs < startWV, 1, 'last'));
     end
     
     % check if previous / next detection exists, and exclude detections 
