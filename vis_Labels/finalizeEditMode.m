@@ -67,6 +67,8 @@ function finalizeEditMode(event)
             maxFreq = pos(2) + pos(4);
     
             % update main data table with edited values
+            REMORA.lt.lVis_det.dataTable.start_time_sec(detectionIdx) = start_time_sec;
+            REMORA.lt.lVis_det.dataTable.end_time_sec(detectionIdx) = end_time_sec;
             REMORA.lt.lVis_det.dataTable.start_time(detectionIdx) = startTime;
             REMORA.lt.lVis_det.dataTable.end_time(detectionIdx) = endTime;
             REMORA.lt.lVis_det.dataTable.min_frequency(detectionIdx) = minFreq;
