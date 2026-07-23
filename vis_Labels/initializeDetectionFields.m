@@ -35,14 +35,8 @@ function initializeDetectionFields(data, changeType)
 
     excelEpoch = datetime(2000, 1, 0);
 
-    unixEpoch = datetime(1970,1,1,0,0,0);
-
-    startTime = unixEpoch + seconds(data.start_time_sec);
-    endTime   = unixEpoch + seconds(data.end_time_sec);
-
-    REMORA.lt.lVis_det.detection.starts = days(startTime - excelEpoch);
-    REMORA.lt.lVis_det.detection.stops  = days(endTime - excelEpoch);
-    
+    REMORA.lt.lVis_det.detection.starts = days(data.start_time - excelEpoch);
+    REMORA.lt.lVis_det.detection.stops = days(data.end_time - excelEpoch);
     REMORA.lt.lVis_det.detection.labels = data.label;
     REMORA.lt.lVis_det.detection.min_freq = data.min_frequency;
     REMORA.lt.lVis_det.detection.max_freq = data.max_frequency;
