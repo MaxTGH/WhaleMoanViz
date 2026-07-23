@@ -89,12 +89,16 @@ function wmvControl(action)
         
             data.start_time = datetime(data.start_time, 'InputFormat', 'yyyy-MM-dd HH:mm:ss.SSS');
             data.end_time = datetime(data.end_time, 'InputFormat', 'yyyy-MM-dd HH:mm:ss.SSS');
-            excelEpoch = datetime(2000, 1, 0); % triton datetime format
-            Starts_time = data.start_time;
-            % convert Start and Stop columns to datetime and calculate days since epoch
-            Starts = days(Starts_time - excelEpoch); 
-            Stops_time = data.end_time;
-            Stops = days(Stops_time - excelEpoch);
+            % Convert Unix timestamps (seconds since 1970-01-01) to Triton's
+            % day representation (days since 2000-01-00)
+            excelEpoch = datetime(2000,1,0,'TimeZone','UTC');
+            unixEpoch  = datetime(1970,1,1,0,0,0,'TimeZone','UTC');
+            
+            startTime = unixEpoch + seconds(data.start_time_sec);
+            endTime   = unixEpoch + seconds(data.end_time_sec);
+            
+            Starts = days(startTime - excelEpoch);
+            Stops  = days(endTime - excelEpoch);
         
             % add frequency and score
             Labels = data.label;
