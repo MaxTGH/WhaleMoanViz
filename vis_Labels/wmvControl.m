@@ -87,8 +87,8 @@ function wmvControl(action)
             % sort by the 'start_time' column
             data = sortrows(data, 'start_time');
         
-            data.start_time = datetime(data.start_time, 'InputFormat', 'yyyy-MM-dd HH:mm:ss');
-            data.end_time = datetime(data.end_time, 'InputFormat', 'yyyy-MM-dd HH:mm:ss');
+            data.start_time = datetime(data.start_time, 'InputFormat', 'yyyy-MM-dd HH:mm:ss.SSS');
+            data.end_time = datetime(data.end_time, 'InputFormat', 'yyyy-MM-dd HH:mm:ss.SSS');
             excelEpoch = datetime(2000, 1, 0); % triton datetime format
             Starts_time = data.start_time;
             % convert Start and Stop columns to datetime and calculate days since epoch
